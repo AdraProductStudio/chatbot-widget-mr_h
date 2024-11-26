@@ -21,7 +21,7 @@
         :root {
             --lightblue: #e3f2fd;
             --purple: #724ae8;
-            --blue: #0275d8;
+            --green: #00904a;
         }
 
         * {
@@ -53,7 +53,7 @@
         }
 
         .MR-chatbot header {
-            background-color: #2a79ae;
+            background-color: var(--green);
             text-align: center;
             padding: 30px 0;
             position: relative;
@@ -96,7 +96,7 @@
             height: 32px;
             width: 32px;
             align-self: flex-end;
-            background-color: #3683b8;
+            background-color: var(--green);
             color: #fff;
             text-align: center;
             margin: 0 10px 7px 0;
@@ -131,7 +131,7 @@
         }
 
         .MR-chatbot #MR-send-btn {
-            color: #3683b8;
+            color: var(--green);
             font-size: 1.5rem;
             cursor: pointer;
             align-self: center;
@@ -150,7 +150,7 @@
             position: fixed;
             bottom: 40px;
             right: 35px;
-            background-color: #3683b8;
+            background-color: var(--green);
             color: #fff;
             border-radius: 50%;
             width: 50px;
@@ -212,7 +212,7 @@
         .MR-chatbot .botText span {
             line-height: 1.5em;
             display: inline-block;
-            background-color: #3683b8;
+            background-color: var(--green);
             color: #fff;
             padding: 10px;
             border-radius: 8px;
@@ -229,7 +229,7 @@
         .MR-chatbot .placeholder-msg-text {
             line-height: 1.5em;
             display: inline-block;
-            background-color: #3683b8;
+            background-color: #0c9854;
             color: #fff;
             font-size: 14px;
             padding: 10px;
@@ -247,7 +247,7 @@
         .MR-chatbot .incoming-msg-text {
             line-height: 1.5em;
             display: inline-block;
-            background-color: #3683b8;
+            background-color: #0c9854;
             color: #fff;
             font-size: 14px;
             padding: 10px;
@@ -294,7 +294,7 @@
 
         .MR-chatbot .outgoing-msg-text {
             margin-right: 10px;
-            background: #e3e2e2 !important;
+            background: #c6c6c6 !important;
             color: #000;
             font-size: 14px;
             padding: 10px;
@@ -329,7 +329,7 @@
             }
 
             .MR-chatbot header {
-                background-color: #3683b8;
+                background-color: var(--green);
                 text-align: center;
                 padding: 30px 0;
                 position: relative;
@@ -364,7 +364,7 @@ overflow-y: scroll;
         MRheader.className = "MR-header"
         const MRh2 = document.createElement("h2")
         MRh2.className = "MR-h2"
-        MRh2.innerText = "MR Agent"
+        MRh2.innerText = "Chatbot"
         const p1 = document.createElement("p")
         p1.className = "MR material-symbols-outlined close-icon chatbot-close-icon"
         p1.innerText = "close"
@@ -499,7 +499,7 @@ overflow-y: scroll;
         let apiToken;
 
         const generateToken = async () => {
-            const url = "https://consumertestapi.matsuritech.com/gettoken";
+            const url = "https://consumerapi.matsuritech.com/gettoken";
             const username = "matsuri"; // Replace with your username
             const password =
                 "fc153ac36455604c6a6bcb3e22c0a4debfb746d59ad4a33a4b0d50f315206958d78da64e88957993e537e5ef235537a65ac0bc8fbaa725ae3e8e151617e82b81";
@@ -548,10 +548,8 @@ overflow-y: scroll;
 
 
             requiredParams = {
-                client_name: "ModelRocket",
-                service_name: "Sales Knowledge Worker MR-H",
-                // client_name: "Unger - UK",
-                // service_name: "Unger - UK",
+                client_name: "Unger - UK",
+                service_name: "Unger - UK",
                 language: "english",
                 msg: userInputTextValue,
                 flag: flag,
@@ -559,7 +557,7 @@ overflow-y: scroll;
             };
 
 
-            const url = "https://consumertestapi.matsuritech.com/chatbot_widget";
+            const url = "https://consumerapi.matsuritech.com/chatbot_widget";
 
             await fetch(url, {
                 method: "POST",
@@ -612,15 +610,9 @@ overflow-y: scroll;
                     "src",
                     "https://modelrocket.matsuritech.com/static/media/model-rocket-bot.4126f760133924edc8a02fd208464bdf.svg"
                 );
-                const incomingMsgText = document.createElement("div");
+                const incomingMsgText = document.createElement("p");
                 incomingMsgText.className = "incoming-msg-text";
                 incomingMsgText.innerHTML = `${apiData}`;
-                // incomingMsgText.innerHTML = 'This is my url <a href="#">GO TO LINK</a> done';
-                let linkText = incomingMsgText.querySelector('a')
-                if (linkText) {
-                    linkText.style.color = '#fff';
-                    linkText.style.textDecoration = 'underline';
-                }
                 const incomingMsgTime = document.createElement("i");
                 incomingMsgTime.className = "incoming-msg-time";
                 incomingMsgTime.innerText = formatAMPM(new Date());
@@ -675,7 +667,7 @@ overflow-y: scroll;
             personImg.className = "person-img";
             personImg.setAttribute(
                 "src",
-                "https://static.vecteezy.com/system/resources/previews/016/079/150/non_2x/user-profile-account-or-contacts-silhouette-icon-isolated-on-white-background-free-vector.jpg"
+                "https://cdn.adraproductstudio.com/person1.png"
             );
             outgoingMsgBox.append(outgoingMsgText, personImg);
 
@@ -732,7 +724,6 @@ overflow-y: scroll;
 
         let country = "https://www.ungerglobal.com/es/servicio/downloads"
         let splittedCountry = country.split("/")
-        console.log(splittedCountry)
         console.log(splittedCountry[3])
 
         console.log(window.location)
