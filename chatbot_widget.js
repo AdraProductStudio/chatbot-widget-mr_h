@@ -1092,7 +1092,7 @@
                                 return
                             } else {
                                 apiData = data.data.message;
-
+                                MRUserInputText.focus();
                                 resetIdleTracking("continous");
                             }
                         }
@@ -1139,23 +1139,23 @@
                     triangleLeft.className = "triangle-left";
                     const incomingMsgText = document.createElement("p");
                     incomingMsgText.className = "incoming-msg-text";
-                    // incomingMsgText.innerHTML = `${apiData}`;
-                    // const incomingMsgTime = document.createElement("i");
-                    // incomingMsgTime.className = "incoming-msg-time";
-                    // incomingMsgTime.innerText = formatAMPM(new Date());
-                    // incomingMsgText.append(incomingMsgTime);
+                    incomingMsgText.innerHTML = `${apiData}`;
+                    const incomingMsgTime = document.createElement("i");
+                    incomingMsgTime.className = "incoming-msg-time";
+                    incomingMsgTime.innerText = formatAMPM(new Date());
+                    incomingMsgText.append(incomingMsgTime);
                     const bottomChat1 = document.createElement("div");
                     incomingMsgBox.append(essenceImg, triangleLeft, incomingMsgText, bottomChat1);
-                    typeHTML(incomingMsgText, `${apiData}`, 30, () => {
+                    // typeHTML(incomingMsgText, `${apiData}`, 30, () => {
 
-                        const incomingMsgTime = document.createElement("i");
-                        incomingMsgTime.className = "incoming-msg-time";
-                        incomingMsgTime.innerText = formatAMPM(new Date());
-                        incomingMsgText.appendChild(incomingMsgTime); // Append time AFTER typing completes
-                        MRUserInputText.focus();
-                        MRUserInputText.style.pointerEvents = "all"
-                        bottomChat1.scrollIntoView({ behavior: "smooth" });
-                    });
+                    //     const incomingMsgTime = document.createElement("i");
+                    //     incomingMsgTime.className = "incoming-msg-time";
+                    //     incomingMsgTime.innerText = formatAMPM(new Date());
+                    //     incomingMsgText.appendChild(incomingMsgTime); // Append time AFTER typing completes
+                    //     MRUserInputText.focus();
+                    //     MRUserInputText.style.pointerEvents = "all"
+                    //     bottomChat1.scrollIntoView({ behavior: "smooth" });
+                    // });
 
                     if (apiData !== undefined) {
                         MRChatboxUl.append(incomingMsgBox);
