@@ -3,13 +3,11 @@
         ChatWidget.init({
             client_id: "f195eef7-fd2f-4d54-9da2-69a757366093",
             client_secret: "tavQqJfg5BoTADWhw30jbm_PDFZB7FQ-QzAKHHvD6yM",
-            //   domain:"adraproductstudio.github.io",
             domain: "modelrocket.ai",
         });
     });
     const ChatWidget = {
         init: function (config) {
-            // const { apiKey, containerId = "Adra-MR-chatbot-section" } = config;
 
             const {
                 client_id,
@@ -23,83 +21,60 @@
                 this.injectStyles();
                 this.injectGoogleFonts();
                 this.renderChatWidget(client_id, client_secret, domain, containerId);
-                // this.generateToken(client_id, client_secret, domain)
             } else {
                 alert('Chatbot not rendered')
             }
 
-
-            // if (config.apiKey === "MR_Widget") {
-            //     this.injectStyles(apiKey);
-            //     this.injectGoogleFonts();
-            //     this.renderChatWidget(config, containerId);
-            // } else {
-            //     alert("Invalid API key")
-            // }
         },
 
-        // generateToken : (client_id,client_secret, domain) => {
-        //     const url = "https://consumerapi-dev.modelrocket.ai/gettoken";
-        //     const username = client_id; // Replace with your username
-        //     const password = client_secret ;
-        //     const base64Credentials = btoa(`${username}:${password}`);
-
-        //     fetch(url, {
-        //         method: "GET",
-        //         headers: {
-        //             Authorization: `Basic ${base64Credentials}`,
-        //             domain : domain
-        //         },
-        //     })
-        //         .then((response) => {
-        //             if (!response.ok) {
-        //                 throw new Error(`HTTP error! status: ${response.status}`);
-        //             }
-        //             return response.json();
-        //         })
-        //         .then((data) => {
-        //             if (data.error_code === 200) {
-        //                      this.injectGoogleFonts();
-        //         this.renderChatWidget(config, containerId);
-        //                 apiToken = data.data.token;
-        //                 (async () => {
-        //                     await getResponse("init", "");
-        //                 })();
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             console.error("Error:", error);
-        //         });
-        //     },
 
         injectGoogleFonts: function () {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap";
-            document.head.appendChild(link);
+            const metaViewport = document.createElement("meta");
+            metaViewport.name = "viewport";
+            metaViewport.content = "width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no";
+            document.head.appendChild(metaViewport);
+
+            const link1 = document.createElement("link");
+            link1.rel = "stylesheet";
+            link1.href = "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap";
+            document.head.appendChild(link1);
+
+            const link2 = document.createElement("link");
+            link2.rel = "stylesheet";
+            link2.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap";
+            document.head.appendChild(link2);
         },
 
         injectStyles: function (style) {
             const styleTag = document.createElement("style");
             styleTag.innerHTML = `
 
-
                                 :root {
                                 --lightblue: #e3f2fd;
-                                --purple: #724ae8;
-                                --overall-theme: #12294b;
+                                --overall-theme: #13294b;
                             }
 
                             * {
                                 margin: 0;
                                 padding: 0;
                                 box-sizing: border-box;
-                                font-family: 'Poppins', sans-serif;
+                            }
+
+                            .Adra-MR-chatbot .Adra-MR-chatbox::-webkit-scrollbar {
+                            display: none;
+                            }
+                            .Adra-MR-chat-input textarea::-webkit-scrollbar {
+                            display: none;
+                            }
+
+                            .Adra-MR-chatbot .Adra-MR-chatbox {
+                            -ms-overflow-style: none;  /* IE and Edge */
+                            scrollbar-width: none;  /* Firefox */
                             }
 
                             .Adra-MR-chatbot {
                                 position: fixed;
-                                bottom: 100px;
+                                bottom: 110px;
                                 right: 40px;
                                 background-color: #fff;
                                 width: 420px;
@@ -109,7 +84,7 @@
                                 opacity: 0;
                                 transition: all 0.2s linear;
                                 border: 1px solid rgb(228, 228, 228);
-                                z-index: 1000
+                                z-index: 99999999999999999 !important;
                             }
 
                             .Adra-MR-chatbot .feedback-modal {
@@ -145,7 +120,7 @@
                             }
 
                             .Adra-MR-chatbot .feedback-modal.show .feedback-container {
-                                width: 65%;
+                                width: 80%;
                                 /* height: 200px; */
                                 background-color: #fff;
                                 position: absolute;
@@ -257,15 +232,6 @@
                                 box-shadow: 0 0 0 rgba(0, 0, 0, .2);
                             }
 
-
-                            /* .Adra-MR-chatbot .feedback-submit-button{
-                                            display:none; 
-                                        }
-
-                                        .Adra-MR-chatbot .feedback-submit-button.show{
-                                            display:block; 
-                                        } */
-
                             .Adra-MR-chatbot .feedback-button-container {
                                 display: flex;
                                 display: none;
@@ -312,10 +278,12 @@
                             }
 
                             .Adra-MR-chatbot header h2 {
-                                color: #fff;
-                                font-size: 1.4rem;
-                                margin-bottom: 0;
-
+                                color: #FFF;
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: normal;
+                                margin-bottom:0px !important
                             }
 
                             .Adra-MR-chatbot .Adra-MR-chatbox {
@@ -328,14 +296,7 @@
                                 display: flex;
                             }
 
-                            /* .chatbox p{
-                        background-color: var(--overall-theme);
-                        border-radius: 10px 10px 0px 10px;
-                        padding: 12px 16px;
-                        color: #fff;
-                        font-size: 0.95rem;
-                        max-width: 75%;
-                    } */
+
                             .Adra-MR-chatbox .incoming {
                                 margin-top: 7px;
 
@@ -362,53 +323,62 @@
                                 position: absolute;
                                 bottom: 0;
                                 width: 100%;
-                                border-top: 1px solid #ccc;
-                                padding: 0px 20px;
+                                padding: 14px;
                                 display: flex;
                                 gap: 5px;
                                 background: #fff;
                             }
 
                             .Adra-MR-chat-input textarea {
-                                border: none;
                                 outline: none;
                                 font-size: 0.95rem;
                                 resize: none;
-                                padding: 16px 15px 16px 0;
-                                width: 100%;
-                                height: px;
+                                padding: 10px 16px;
+                                width: 90%;
+                                height: 40px;
+                                border-radius: 10px;
+                                border: 1px solid #E0E0E0;
+                                background: #FFF;
                             }
 
-                            .Adra-MR-chatbot #Adra-MR-send-btn {
-                                color: var(--overall-theme);
+                           #Adra-MR-send-btn {
+                                color: #fff;
                                 font-size: 1.5rem;
                                 cursor: pointer;
                                 align-self: center;
-                                /* visibility: hidden; */
-                                pointer-events: none;
-                                opacity: 25%;
-                            }
+                                opacity: 0.25;
+                                transition: opacity 0.2s ease;
+                                background: var(--overall-theme);
 
-                            .Adra-MR-chat-input textarea:valid~#Adra-MR-send-btn {
-                                visibility: visible;
-                                pointer-events: all;
-                                opacity: 100%;
+                                color: #fff;
+                                font-size: 1.5rem;
+                                cursor: pointer;
+                                align-self: center;
+                                transition: opacity 0.2s ease;
+                                background: var(--overall-theme);
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 50%;
+                                height: 36px;
+                                width: 36px;
                             }
-
+                                
                             .Adra-MR-chatbot-toggler {
                                 position: fixed;
                                 bottom: 40px;
                                 right: 35px;
-                                background-color: var(--overall-theme);
+                                background-color:var(--overall-theme) ;
                                 color: #fff;
                                 border-radius: 50%;
-                                width: 50px;
-                                height: 50px;
+                                width: 60px;
+                                height: 60px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 cursor: pointer;
                                 z-index: 999;
+                                color: #fff;
                             }
 
                             .Adra-MR-chatbot-toggler p {
@@ -480,14 +450,14 @@
                             .Adra-MR-chatbot .placeholder-msg-text {
                                 line-height: 1.5em;
                                 display: inline-block;
-                                background-color: #1b3b69;
+                                background-color: var(--overall-theme);
                                 color: #fff;
                                 font-size: 14px;
                                 padding: 10px;
                                 border-radius: 8px;
                                 border-top-left-radius: 0px;
                                 max-width: 100%;
-                                /* margin-left: 15px; */
+                                margin-left: 15px; 
                                 animation: floatup .5s forwards;
                                 overflow-wrap: break-word;
                                 word-wrap: break-word;
@@ -498,14 +468,14 @@
                             .Adra-MR-chatbot .incoming-msg-text {
                                 line-height: 1.5em;
                                 display: inline-block;
-                                background-color: #1b3b69;
+                                background-color: var(--overall-theme);
                                 color: #fff;
                                 font-size: 14px;
                                 padding: 10px;
                                 border-radius: 8px;
                                 border-top-left-radius: 0px;
                                 max-width: 100%;
-                                /* margin-left: 15px; */
+                                margin-left: 15px;
                                 animation: floatup .5s forwards;
                                 overflow-wrap: break-word;
                                 word-wrap: break-word;
@@ -514,8 +484,8 @@
                             }
 
                             .Adra-MR-chatbot .incoming-msg-text a {
-                                color:rgb(173, 216, 247) !important;
-                                font-weight: 500 !important;
+                                color:#fff !important;
+                                font-weight: 600 !important;
                                 text-decoration: underline !important;
                             }
 
@@ -528,8 +498,9 @@
                                 margin-left: 10px;
                                 width: 0;
                                 height: 0;
-                                border-top: 10px solid #1b3b69;
+                                border-top: 10px solid var(--overall-theme);
                                 border-left: 12px solid transparent;
+                                display:none
                             }
 
                             .Adra-MR-chatbot .outgoing-msg {
@@ -537,6 +508,7 @@
                                 float: right;
                                 width: 75%;
                                 justify-content: end;
+                                margin-bottom: 1rem;
                             }
 
                             .Adra-MR-chatbot .incoming-timeFontSize {
@@ -566,24 +538,23 @@
                                 margin-right: 10px;
                                 width: 0;
                                 height: 0;
-                                border-top: 10px solid #7cb0d4;
+                                border-top: 10px solid #EAF0FF;
                                 border-right: 12px solid transparent;
+                                display:none
                             }
 
                             .Adra-MR-chatbot .outgoing-msg-text {
-                                margin-right: 0px;
-                                background: #7cb0d4 !important;
+                                margin-right: 15px;
+                                background:#EAF0FF !important;
                                 color: #000;
                                 font-size: 14px;
                                 padding: 10px;
                                 border-radius: 8px;
                                 border-top-right-radius: 0px;
                                 font-size: 14px;
-                                margin-bottom: 1.5rem;
                                 word-wrap: break-word;
                                 word-break: break-word;
                                 max-width: 100%;
-
                             }
 
                             .d-none {
@@ -591,12 +562,7 @@
                             }
 
 
-
-
-
-
                             /* media-queries */
-
                             @media (max-width:490px) {
                                 .Adra-MR-chatbot {
                                     width: 100%;
@@ -606,22 +572,29 @@
                                     z-index: 1;
                                 }
 
-                                .Adra-MR-chatbot header {
+                            .Adra-MR-chatbot header {
                                     background-color: var(--overall-theme);
                                     text-align: center;
                                     padding: 30px 0;
                                     position: relative;
                                 }
 
-                                .Adra-MR-chatbot header .close-icon {
+                            .Adra-MR-chatbot .Adra-MR-chatbox {
+                                height: 510px;
+                                overflow-y: scroll;
+                                padding: 15px 20px 10px;
+                                height: 76vh; 
+                            }
+
+                            .Adra-MR-chatbot header .close-icon {
                                     display: block;
                                 }
 
-                                .Adra-MR-chatbot {
+                            .Adra-MR-chatbot {
                                     opacity: 0 !important;
                                 }
 
-                                .Adra-MR-show-chatbot .Adra-MR-chatbot {
+                            .Adra-MR-show-chatbot .Adra-MR-chatbot {
                                     opacity: 1 !important;
                                 }
                             }`;
@@ -636,41 +609,16 @@
                 document.body.appendChild(container);
             }
 
-            container.innerHTML = `
-                        <div id="Adra-MR-chatbot-section" class="Adra-MR-chatbot-section">
-                            <div class="Adra-MR-chatbot">
-                                <header class="Adra-MR-header">
-                                <h2 class="Adra-MR-h2">MR Agent</h2>
-                                <p class="MR material-symbols-outlined close-icon Adra-MR-chatbot-close-icon">close</p>
-                                </header>
-                                <div class="Adra-MR-chat-container" id="Adra-MR-chat-container">
-                                <ul class="Adra-MR-chatbox" id="Adra-MR-chatbox">
-                                    <div class="d-flex incoming-msg" id="incoming-msg-box">
-                        
-                                    </div>
-                                </ul>
-                                </div>
-                                <div class="Adra-MR-chat-input">
-                                <textarea autofocus="" class="Adra-MR-userInputText" id="Adra-MR-userInputText" placeholder="Enter a message..."
-                                    required=""></textarea>
-                                <span class="material-symbols-outlined" id="Adra-MR-send-btn">send</span>
-                                </div>
-                            </div>
-                            <div class="Adra-MR-chatbot-toggler">
-                                <p class="material-symbols-outlined message-icon">mode_comment</p>
-                                <p class="material-symbols-outlined close-icon">close</p>
-                            </div>
-                        </div>`;
+            container.innerHTML = ``;
 
             this.initializeChatLogic(client_id, client_secret, domain, container);
         },
 
         initializeChatLogic: function (client_id, client_secret, domain, container) {
 
-            // Warn when the page is being closed or reloaded
             window.addEventListener("beforeunload", (event) => {
                 event.preventDefault();
-                event.returnValue = ""; // Ensures browser prompts a confirmation
+                event.returnValue = "";
                 hideWidget()
             });
 
@@ -678,13 +626,11 @@
             var feedbackValue;
             var starRating = 0;
             var stars;
-
-
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 
 
             function getStarValue(event) {
-
                 if (event.target.tagName === "INPUT") {
                     const rating = event.target.value;
                     starRating = rating;
@@ -705,32 +651,56 @@
                 starRating = 0;
             }
 
+
             const handleGiveFeedback = () => {
                 const feedbackInputField = document.getElementById("feedback-input-field");
-                feedbackInputField.classList.add("show")
+                feedbackInputField.classList.add("show");
+                feedbackInputField.focus();
 
-                const feedbackButtonContainer = document.getElementById("feedback-button-container")
-                feedbackButtonContainer.classList.add("hide")
+                const feedbackButtonContainer = document.getElementById("feedback-button-container");
+                feedbackButtonContainer.classList.add("hide");
 
-                const feedbackSubmitButtonContainer = document.getElementById("feedback-submit-button-container")
-                feedbackSubmitButtonContainer.classList.add("show")
-                feedbackSubmitButtonContainer.addEventListener("click", hideWidget)
-                feedbackInputField.addEventListener("keypress", (e) => {
-                if (e.key === "Enter") {
-                    if (feedbackInputField.value.trim() === "") {
-                        e.preventDefault();
-                        return;
-                    } else {
-                        e.preventDefault();
-                        hideWidget();
-                    }
-                }
-            });
+                const feedbackSubmitButtonContainer = document.getElementById("feedback-submit-button-container");
+                feedbackSubmitButtonContainer.classList.add("show");
 
-                const feedbackQuestion = document.getElementById("feedback-question")
+                const feedbackQuestion = document.getElementById("feedback-question");
                 feedbackQuestion.innerText = "Please specify the query intent and your feedback below";
 
-            }
+                const updateSubmitButtonState = () => {
+                    if (feedbackInputField.value.trim().length === 0) {
+                        feedbackSubmitButtonContainer.style.opacity = "0.3";
+                        feedbackSubmitButtonContainer.style.pointerEvents = "none";
+                    } else {
+                        feedbackSubmitButtonContainer.style.opacity = "1";
+                        feedbackSubmitButtonContainer.style.pointerEvents = "all";
+                    }
+                };
+                updateSubmitButtonState();
+
+                feedbackInputField.addEventListener("input", updateSubmitButtonState);
+
+                feedbackSubmitButtonContainer.addEventListener("click", hideWidget)
+                feedbackInputField.addEventListener("keydown", (e) => {
+                    if (isMobile) {
+                        return;
+                    }
+                    if (e.key === "Enter" && e.shiftKey) {
+                        return
+                    };
+
+                    if (e.key === "Enter") {
+                        if (feedbackInputField.value.trim() === "") {
+                            e.preventDefault();
+                            return;
+                        } else {
+                            e.preventDefault();
+                            hideWidget();
+                        }
+                    }
+                });
+            };
+
+
             const MRChatbotSection = document.getElementById('Adra-MR-chatbot-section')
             MRChatbotSection.className = "Adra-MR-chatbot-section"
 
@@ -760,11 +730,11 @@
                                      </div>
                                      <textarea type="text" placeholder="Enter your feedback here" id="feedback-input-field" class="feedback-input-field" ></textarea>
                                      <div id="feedback-button-container" class="feedback-button-container" >
-                                         <button style="background-color: #1b3b69; color: #fff; border: none; width: 50%; border-radius: 5px; padding: 3px;" onclick="handleGiveFeedback()">Yes</button>
+                                         <button style="background-color: var(--overall-theme); color: #fff; border: none; width: 50%; border-radius: 5px; padding: 3px;" onclick="handleGiveFeedback()">Yes</button>
                                          <button style="background-color: lightgrey; color: #000; border: none; width: 50%; border-radius: 5px; padding: 3px;" onclick="hideWidget()">No</button>
                                      </div>
-                                     <div id="feedback-submit-button-container" class="feedback-submit-button-container">
-                                         <button style="background-color: #1b3b69; color: #fff; border: none; width: 100%; border-radius: 5px; padding: 8px;">Submit</button>
+                                     <div id="feedback-submit-button-container" class="feedback-submit-button-container" >
+                                         <button id="feedback-submit-button" style="background-color: var(--overall-theme); color: #fff; border: none; width: 100%; border-radius: 5px; padding: 8px;cursor:pointer">Submit</button>
                                      </div>
                                   </div>`;
 
@@ -775,7 +745,8 @@
             MRheader.className = "Adra-MR-header"
             const MRh2 = document.createElement("h2")
             MRh2.className = "Adra-MR-h2"
-            MRh2.innerText = "Chatbot"
+            MRh2.innerText = "Chat Agent"
+            MRh2.style.fontSize = "20px";
             const minimizedScreenCloseIcon = document.createElement("p")
             minimizedScreenCloseIcon.className = "MR material-symbols-outlined close-icon chatbot-close-icon"
             minimizedScreenCloseIcon.innerText = "close"
@@ -808,27 +779,54 @@
             MRUserInputText.setAttribute("id", "Adra-MR-userInputText")
             MRUserInputText.setAttribute("placeholder", "Enter a message...")
             MRUserInputText.setAttribute("required", "")
-            const MRSendbtnSpan = document.createElement("span")
-            MRSendbtnSpan.className = "material-symbols-outlined"
+            MRUserInputText.style.fontSize = "14px";
+            // MRSendbtnSpan.innerText = "send"
+            const MRSendbtnSpan = document.createElement("p")
+            MRSendbtnSpan.className = ""
             MRSendbtnSpan.setAttribute("id", "Adra-MR-send-btn")
-            // MRSendbtnSpan.style.backgroundColor = "red"
-            // MRSendbtnSpan.setAttribute("onclick", "handleSendClick()")
-            MRSendbtnSpan.innerText = "send"
+            MRSendbtnSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="#fff">
+                                        <path d="M15.8011 24.3671C14.49 24.3671 12.6344 23.4449 11.1678 19.0338L10.3677 16.6338L7.96773 15.8338C3.56773 14.3671 2.64551 12.5116 2.64551 11.2004C2.64551 9.90041 3.56773 8.03374 7.96773 6.55596L17.4011 3.41152C19.7567 2.62263 21.7233 2.85596 22.9344 4.05596C24.1456 5.25596 24.3789 7.23374 23.59 9.58929L20.4456 19.0227C18.9678 23.4449 17.1122 24.3671 15.8011 24.3671ZM8.48995 8.14485C5.40106 9.17818 4.30106 10.4004 4.30106 11.2004C4.30106 12.0004 5.40106 13.2227 8.48995 14.2449L11.29 15.1782C11.5344 15.256 11.7344 15.456 11.8122 15.7004L12.7456 18.5004C13.7678 21.5893 15.0011 22.6893 15.8011 22.6893C16.6011 22.6893 17.8233 21.5893 18.8567 18.5004L22.0011 9.06707C22.5678 7.35596 22.4678 5.95596 21.7456 5.23374C21.0233 4.51152 19.6233 4.42263 17.9233 4.98929L8.48995 8.14485Z" fill="#fff"/>
+                                        <path d="M11.2344 16.3334C11.0233 16.3334 10.8121 16.2557 10.6455 16.089C10.3233 15.7668 10.3233 15.2334 10.6455 14.9112L14.6233 10.9223C14.9455 10.6001 15.4788 10.6001 15.8011 10.9223C16.1233 11.2446 16.1233 11.7779 15.8011 12.1001L11.8233 16.089C11.6677 16.2557 11.4455 16.3334 11.2344 16.3334Z" fill="#fff"/>
+                                       </svg>`
+            const updateSendButtonState = () => {
+                if (MRUserInputText.value.trim().length === 0) {
+                    MRSendbtnSpan.style.pointerEvents = "none";
+                    MRSendbtnSpan.style.opacity = "0.50";
+                } else {
+                    MRSendbtnSpan.style.pointerEvents = "all";
+                    MRSendbtnSpan.style.opacity = "1";
+                }
+            };
+            updateSendButtonState();
+
+            MRUserInputText.addEventListener("input", updateSendButtonState);
+
             MRChatInput.append(MRUserInputText, MRSendbtnSpan)
             MRChatbot.append(loadingContainer, feedbackModal, MRheader, MRChatContainer, MRChatInput)
 
-
-
             const MRChatbotToggler = document.createElement("div")
             MRChatbotToggler.className = "Adra-MR-chatbot-toggler"
-            const MRMessageIcon = document.createElement("p")
-            MRMessageIcon.className = "material-symbols-outlined message-icon"
-            MRMessageIcon.innerText = "mode_comment"
-            const MRCloseIcon = document.createElement("p")
-            MRCloseIcon.className = "material-symbols-outlined close-icon"
-            MRCloseIcon.innerText = "close"
-            MRChatbotToggler.append(MRMessageIcon, MRCloseIcon)
+            const MRMessageIcon = document.createElement("p");
+            MRMessageIcon.className = "message-icon";
+            MRMessageIcon.innerHTML = `
+                                <img 
+                                    src="https://d2rv8gjz8808ge.cloudfront.net/bot-open.png" 
+                                    style="width: 60px; height: 60px;" 
+                                    alt="Message Icon"
+                                />
+                                `;
 
+            const MRCloseIcon = document.createElement("p");
+            MRCloseIcon.className = "close-icon";
+
+            MRCloseIcon.innerHTML = `
+                                <img 
+                                    src="https://d2rv8gjz8808ge.cloudfront.net/bot-close.png" 
+                                    style="width: 60px; height: 60px;" 
+                                    alt="Message Icon"
+                                />
+                                `;
+            MRChatbotToggler.append(MRMessageIcon, MRCloseIcon)
             MRChatbotSection.append(MRChatbot, MRChatbotToggler)
             document.body.append(MRChatbotSection)
 
@@ -839,21 +837,6 @@
                 return Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
             }
 
-            function typeHTML(element, text, speed = 30, callback) {
-                element.innerHTML = "";
-                let index = 0;
-                function type() {
-                    if (index < text.length) {
-                        element.innerHTML += text[index];
-                        index++;
-                        setTimeout(type, speed);
-                    } else if (callback) {
-                        callback();
-                    }
-                }
-                type();
-            }
-
             const triangleLeft = document.createElement("div");
             triangleLeft.className = "triangle-left";
             const incomingMsgBox1 = document.createElement("div");
@@ -862,13 +845,17 @@
             essenceImg.className = "essence-img";
             essenceImg.setAttribute(
                 "src",
-                "https://cdn.modelrocket.ai/cdn/unger_digital_assistant.png"
+                "https://d2rv8gjz8808ge.cloudfront.net/bot-incoming-msg-icon.png"
             );
+
+            
+
+            
             const incomingMsgText = document.createElement("p");
             incomingMsgText.className = "placeholder-msg-text";
 
             incomingMsgText.innerHTML = `Loading...`;
-            const incomingMsgTime = document.createElement("i");
+            const incomingMsgTime = document.createElement("span");
             incomingMsgTime.className = "placeholder-msg-time";
             incomingMsgTime.innerText = formatAMPM(new Date());
             incomingMsgText.append(incomingMsgTime);
@@ -918,7 +905,6 @@
                 feedbackInput = document.getElementById("feedback-input-field");
                 feedbackValue = feedbackInput.value;
                 resetIdleTracking("close")
-                console.log("starRating", starRating)
             }
 
 
@@ -932,7 +918,8 @@
             });
 
             minimizedScreenCloseIcon.addEventListener("click", function () {
-                MRChatbotSection.classList.remove("Adra-MR-show-chatbot");
+                handleToggler("closeWidget")
+                // MRChatbotSection.classList.remove("Adra-MR-show-chatbot");
             });
 
 
@@ -952,8 +939,7 @@
 
             const generateToken = async () => {
                 const url = "https://consumerapi.modelrocket.ai/gettoken";
-                // const url = "https://consumerapi.modelrocket.ai/gettoken";
-                const username = client_id; // Replace with your username
+                const username = client_id;
                 const password = client_secret;
                 const base64Credentials = btoa(`${username}:${password}`);
 
@@ -961,7 +947,6 @@
                     method: "GET",
                     headers: {
                         Authorization: `Basic ${base64Credentials}`,
-                        // domain: "onboardconfig.modelrocket.ai"
                         domain: domain
                     },
                 })
@@ -972,7 +957,6 @@
                         return response.json();
                     })
                     .then((data) => {
-                        console.log(data.data.token)
                         if (data.error_code === 200) {
                             apiToken = data.data.token;
                             (async () => {
@@ -1004,12 +988,12 @@
                     essenceImg2.className = "essence-img";
                     essenceImg2.setAttribute(
                         "src",
-                        "https://cdn.modelrocket.ai/cdn/unger_digital_assistant.png"
+                        "https://d2rv8gjz8808ge.cloudfront.net/bot-incoming-msg-icon.png"
                     );
                     var incomingMsgText2 = document.createElement("p");
                     incomingMsgText2.className = "placeholder-msg-text";
                     incomingMsgText2.innerHTML = `Loading...`;
-                    var incomingMsgTime2 = document.createElement("i");
+                    var incomingMsgTime2 = document.createElement("span");
                     incomingMsgTime2.className = "placeholder-msg-time";
                     incomingMsgTime2.innerText = formatAMPM(new Date());
                     incomingMsgText2.append(incomingMsgTime2);
@@ -1018,8 +1002,6 @@
 
                     MRChatboxUl.append(incomingMsgBox2);
                 }
-
-                console.log(flag)
 
                 var requiredParams;
                 var dataObject;
@@ -1030,10 +1012,10 @@
                         client_name: "ModelRocket",
                         service_name: "Sales Knowledge Worker MR-H",
                         language: "english",
-                        msg: userInputTextValue,
+                        msg: userInputTextValue.trim(),
                         flag: flag,
                         session_id: randomNumber,
-                        feedback: feedbackValue === "" ? "" : feedbackValue,
+                        feedback: feedbackValue === "" ? "" : feedbackValue.trim(),
                         rating: starRating
                     };
 
@@ -1042,14 +1024,12 @@
                         client_name: "ModelRocket",
                         service_name: "Sales Knowledge Worker MR-H",
                         language: "english",
-                        msg: userInputTextValue,
+                        msg: userInputTextValue.trim(),
                         flag: flag,
                         session_id: randomNumber,
 
                     };
                 }
-
-                console.log(requiredParams)
 
                 const url = "https://consumerapi.modelrocket.ai/chatbot_widget";
 
@@ -1058,7 +1038,6 @@
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${apiToken}`,
-                        // domain: "onboardconfig.modelrocket.ai"
                         domain: domain
                     },
                     body: JSON.stringify(requiredParams),
@@ -1070,8 +1049,6 @@
                         return response.json();
                     })
                     .then((data) => {
-                        console.log(Object.keys(data.data).length === 0);
-                        console.log(data);
 
                         dataObject = data.data
                         incomingMsgBox1.className = "d-none"
@@ -1092,7 +1069,16 @@
                                 return
                             } else {
                                 apiData = data.data.message;
-                                MRUserInputText.focus();
+                                if (feedbackModal.classList.contains("show")) {
+                                    MRUserInputText.blur();
+                                } else {
+                                    if (window.screen.width > 490) {
+                                        MRUserInputText.style.pointerEvents = "all"
+                                        MRUserInputText.focus();
+                                    } else {
+                                        MRUserInputText.style.pointerEvents = "all"
+                                    }
+                                }
                                 resetIdleTracking("continous");
                             }
                         }
@@ -1107,12 +1093,15 @@
                         essenceImg.className = "essence-img";
                         essenceImg.setAttribute(
                             "src",
-                            "https://cdn.modelrocket.ai/cdn/unger_digital_assistant.png"
+                            "https://d2rv8gjz8808ge.cloudfront.net/bot-incoming-msg-icon.png"
                         );
+
+
+           
                         const incomingMsgText = document.createElement("p");
                         incomingMsgText.className = "incoming-msg-text";
                         incomingMsgText.innerHTML = `Something went wrong.Please try again later`;
-                        const incomingMsgTime = document.createElement("i");
+                        const incomingMsgTime = document.createElement("span");
                         incomingMsgTime.className = "incoming-msg-time";
                         incomingMsgTime.innerText = formatAMPM(new Date());
                         incomingMsgText.append(incomingMsgTime);
@@ -1125,7 +1114,7 @@
 
 
                 if (Object.keys(dataObject).length === 0) {
-                    console.log(dataObject)
+
                 } else if (Object.keys(dataObject).length) {
                     const incomingMsgBox = document.createElement("div");
                     incomingMsgBox.className = "d-flex incoming-msg";
@@ -1133,29 +1122,26 @@
                     essenceImg.className = "essence-img";
                     essenceImg.setAttribute(
                         "src",
-                        "https://cdn.modelrocket.ai/cdn/unger_digital_assistant.png"
+                        "https://d2rv8gjz8808ge.cloudfront.net/bot-incoming-msg-icon.png"
                     );
+
+           
                     const triangleLeft = document.createElement("div");
                     triangleLeft.className = "triangle-left";
                     const incomingMsgText = document.createElement("p");
                     incomingMsgText.className = "incoming-msg-text";
                     incomingMsgText.innerHTML = `${apiData}`;
-                    const incomingMsgTime = document.createElement("i");
+                    const links = incomingMsgText.querySelectorAll("a");
+                    links.forEach(link => {
+                        link.setAttribute("target", "_blank");
+                        link.setAttribute("rel", "noopener noreferrer");
+                    });
+                    const incomingMsgTime = document.createElement("span");
                     incomingMsgTime.className = "incoming-msg-time";
                     incomingMsgTime.innerText = formatAMPM(new Date());
                     incomingMsgText.append(incomingMsgTime);
                     const bottomChat1 = document.createElement("div");
                     incomingMsgBox.append(essenceImg, triangleLeft, incomingMsgText, bottomChat1);
-                    // typeHTML(incomingMsgText, `${apiData}`, 30, () => {
-
-                    //     const incomingMsgTime = document.createElement("i");
-                    //     incomingMsgTime.className = "incoming-msg-time";
-                    //     incomingMsgTime.innerText = formatAMPM(new Date());
-                    //     incomingMsgText.appendChild(incomingMsgTime); // Append time AFTER typing completes
-                    //     MRUserInputText.focus();
-                    //     MRUserInputText.style.pointerEvents = "all"
-                    //     bottomChat1.scrollIntoView({ behavior: "smooth" });
-                    // });
 
                     if (apiData !== undefined) {
                         MRChatboxUl.append(incomingMsgBox);
@@ -1168,12 +1154,14 @@
                     essenceImg.className = "essence-img";
                     essenceImg.setAttribute(
                         "src",
-                        "https://cdn.modelrocket.ai/cdn/unger_digital_assistant.png"
+                        "https://d2rv8gjz8808ge.cloudfront.net/bot-incoming-msg-icon.png"
                     );
+
+           
                     const incomingMsgText = document.createElement("p");
                     incomingMsgText.className = "incoming-msg-text";
                     incomingMsgText.innerHTML = `Something went wrong.Please try again later!`;
-                    const incomingMsgTime = document.createElement("i");
+                    const incomingMsgTime = document.createElement("span");
                     incomingMsgTime.className = "incoming-msg-time";
                     incomingMsgTime.innerText = formatAMPM(new Date());
                     incomingMsgText.append(incomingMsgTime);
@@ -1182,8 +1170,6 @@
                     MRChatboxUl.append(incomingMsgBox);
                     bottomChat1.scrollIntoView({ behavior: "smooth" });
                 }
-
-
             };
 
             const generateResponse = async (flag, value) => {
@@ -1199,28 +1185,20 @@
                 outgoingMsgBox.className = "d-flex outgoing-msg";
                 const outgoingMsgText = document.createElement("p");
                 outgoingMsgText.className = "outgoing-msg-text";
-                outgoingMsgText.innerText = MRUserInputText.value;
-                const outgoingMsgTime = document.createElement("i");
+                outgoingMsgText.innerText = MRUserInputText.value.trim();
+                const outgoingMsgTime = document.createElement("span");
                 outgoingMsgTime.className = "outgoing-msg-time";
                 outgoingMsgTime.innerText = formatAMPM(new Date());
                 outgoingMsgText.append(outgoingMsgTime);
-                const personImg = document.createElement("div");
-                personImg.className = "person-img";
-                personImg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 160 160" fill="none">
-                                         <path d="M159.828 79.552C159.828 100.995 151.34 120.459 137.544 134.76C123.077 149.757 102.777 159.085 80.2949 159.085C57.8119 159.085 37.5039 149.757 23.0449 134.756C9.24086 120.455 0.756836 100.991 0.756836 79.552C0.756836 35.626 36.3689 0.019043 80.2939 0.019043C124.22 0.019043 159.828 35.626 159.828 79.552Z" fill="#E3E3E3"/>
-                                         <path d="M64.5518 35.8212C64.5518 32.2092 67.4798 29.2822 71.0908 29.2822H87.8508C98.3058 29.2822 106.781 37.7572 106.781 48.2122V68.5362H66.9198L64.5518 35.8212Z" fill="#383838"/>
-                                         <path d="M58.3042 70.8831H52.7012V43.6121C52.7012 37.5091 58.9502 33.4011 64.5522 35.8211C65.8202 42.5991 58.3042 70.8831 58.3042 70.8831Z" fill="#383838"/>
-                                         <path d="M92.4292 92.5002C90.6692 100.23 85.9042 105.774 80.2982 105.774C74.6882 105.774 69.9142 100.217 68.1582 92.4792L69.5122 87.2292L69.9182 85.6602H90.6662L92.2102 91.6591L92.3512 92.1972L92.4292 92.5002Z" fill="#DADADA"/>
-                                         <path d="M106.399 63.0841C116.73 51.4921 109.837 79.8301 104.122 76.5181C94.0761 70.6961 106.399 63.0841 106.399 63.0841Z" fill="#F4F4F4"/>
-                                         <path d="M137.54 134.759C132.17 140.319 126 145.099 119.22 148.919C108.76 154.809 96.84 158.389 84.13 158.989C82.86 159.059 81.58 159.089 80.29 159.089C73.88 159.089 67.65 158.329 61.68 156.899C53.36 154.909 45.56 151.609 38.49 147.229C32.82 143.719 27.64 139.529 23.04 134.759L24.41 129.359C26.48 121.249 32.87 114.949 41.02 112.999L41.92 112.789L51.91 110.399L54.64 109.749C55.79 109.469 56.89 109.079 57.93 108.579C58.8 108.159 59.63 107.669 60.41 107.109C61.25 106.509 62.04 105.829 62.75 105.079C64.66 103.069 66.07 100.589 66.79 97.7992L67.85 93.6792L68.13 92.5692L68.15 92.4792L69.51 87.2292L69.91 85.6592H90.66L92.21 91.6592L92.35 92.1992L92.43 92.4992L92.44 92.5692L92.73 93.6892L93.79 97.7992C94.78 101.619 97.07 104.889 100.18 107.109C101.88 108.339 103.83 109.249 105.94 109.749L108.46 110.349L119.56 112.999C127.71 114.949 134.1 121.249 136.17 129.359L137.54 134.759Z" fill="#F4F4F4"/>
-                                         <path d="M92.4292 92.5002C90.6692 100.23 85.9042 105.774 80.2982 105.774C74.6882 105.774 69.9142 100.217 68.1582 92.4792L69.5122 87.2292L69.9182 85.6602H90.6662L92.2102 91.6591L92.3512 92.1972L92.4292 92.5002Z" fill="#DADADA"/>
-                                         <path d="M54.1946 63.0841C43.8636 51.4921 50.7566 79.8301 56.4716 76.5181C66.5176 70.6961 54.1946 63.0841 54.1946 63.0841Z" fill="#F4F4F4"/>
-                                         <path d="M104.333 54.7331C104.333 55.6131 104.283 56.4731 104.183 57.3331C104.103 58.1131 103.753 61.4431 103.133 65.6831L103.123 65.6931C102.783 68.0431 102.343 70.6731 101.823 73.3131C101.813 73.3431 101.813 73.3831 101.803 73.4131C100.533 79.8431 98.7427 86.2431 96.4027 88.5731C93.7627 91.2131 91.6427 93.6131 89.2227 95.3431C86.8027 97.0831 84.0927 98.1631 80.2927 98.1631C76.4927 98.1631 73.7827 97.0831 71.3627 95.3431C68.9527 93.6131 66.8227 91.2131 64.1827 88.5731C61.8427 86.2331 60.0527 79.8231 58.7727 73.4031V73.3931C58.7627 73.3831 58.7627 73.3731 58.7627 73.3631C58.6027 72.5331 58.4527 71.7031 58.3027 70.8831C58.2427 70.5431 58.1827 70.2031 58.1227 69.8631C57.8727 68.4231 57.6527 67.0131 57.4527 65.6931C56.7327 60.8231 56.3827 57.1531 56.3827 57.1531C56.3027 56.3631 56.2627 55.5531 56.2627 54.7331C56.2627 54.5231 56.2627 54.3131 56.2727 54.1031C56.3227 52.2131 56.5827 50.3731 57.0527 48.6131C57.0727 48.5331 57.0927 48.4531 57.1127 48.3731C59.7827 38.6131 68.4527 31.3231 78.9127 30.7431C79.3727 30.7131 79.8227 30.7031 80.2927 30.7031C86.9327 30.7031 92.9427 33.3931 97.2927 37.7431C101.053 41.4931 103.573 46.4931 104.183 52.0631C104.283 52.9431 104.333 53.8331 104.333 54.7331Z" fill="#F4F4F4"/>
-                                         <path d="M84.0724 76.3423C84.0724 78.0013 82.3824 79.3453 80.2924 79.3453C78.2125 79.3453 76.5225 78.0013 76.5225 76.3423C76.5225 76.1433 76.5424 75.9453 76.6024 75.7593C76.9324 77.1373 78.4624 78.1793 80.2924 78.1793C82.1324 78.1793 83.6625 77.1373 83.9925 75.7593C84.0525 75.9453 84.0724 76.1433 84.0724 76.3423Z" fill="#EDF6FF"/>
-                                         <path d="M105.057 54.9293C105.057 55.8353 105.006 56.7213 104.903 57.6073C104.821 58.4103 103.134 65.6823 103.134 65.6823C68.584 57.2863 65.821 42.5983 65.821 42.5983C65.934 56.6383 57.454 65.6923 57.454 65.6923C56.712 60.6753 55.664 57.4223 55.664 57.4223C55.582 56.6083 55.54 55.7743 55.54 54.9293C55.54 54.7133 55.54 54.4963 55.55 54.2803C55.601 52.3333 55.869 50.4383 56.353 48.6253C56.374 48.5433 56.394 48.4603 56.415 48.3783C59.165 38.3243 68.097 30.8153 78.872 30.2173C79.346 30.1863 79.809 30.1763 80.294 30.1763C87.134 30.1763 93.325 32.9473 97.806 37.4283C101.679 41.2913 104.275 46.4413 104.904 52.1793C105.006 53.0853 105.057 54.0023 105.057 54.9293Z" fill="#383838"/>
-                                         <path d="M137.543 134.813C123.073 149.803 102.773 159.133 80.293 159.133C57.813 159.133 37.503 149.803 23.043 134.803L24.413 129.413C26.483 121.293 32.873 114.993 41.023 113.043L51.933 110.443L54.643 109.793C55.863 109.503 57.043 109.073 58.143 108.523C63.683 114.423 71.553 118.113 80.293 118.113C89.033 118.113 96.903 114.423 102.443 108.523C103.543 109.063 104.713 109.503 105.943 109.793L108.313 110.363L119.563 113.043C127.713 114.993 134.103 121.293 136.163 129.413L137.543 134.813Z" fill="#1b3b69"/>
-                                         <path d="M108.314 110.363C105.874 113.323 96.9036 122.693 80.2936 123.353C61.1536 124.123 52.4536 111.223 51.9336 110.443L54.6436 109.793C55.8636 109.503 57.0436 109.073 58.1436 108.523C63.6836 114.423 71.5536 118.113 80.2936 118.113C89.0336 118.113 96.9036 114.423 102.444 108.523C103.544 109.063 104.714 109.503 105.944 109.793L108.314 110.363Z" fill="#383838"/>
-                                         </svg>`;
+
+
+                const personImg = document.createElement("img");
+                personImg.className = "essence-img";
+                personImg.setAttribute(
+                    "src",
+                    "https://d2jcmbeljpidf8.cloudfront.net/user-image.png"
+                );
+
                 outgoingMsgBox.append(outgoingMsgText, triangleRight, personImg);
 
                 const bottomChat1 = document.createElement("div");
@@ -1229,16 +1207,21 @@
                 bottomChat1.scrollIntoView({ behavior: "smooth" });
 
                 setTimeout(() => {
-
-
-
                     generateResponse("step", MRUserInputText.value);
                     MRUserInputText.value = "";
+                    updateSendButtonState()
                     bottomChat1.scrollIntoView({ behavior: "smooth" });
                 }, 0);
             }
 
-            MRUserInputText.addEventListener("keypress", (e) => {
+
+            MRUserInputText.addEventListener("keydown", (e) => {
+                if (isMobile) {
+                    return;
+                }
+                if (e.key === "Enter" && e.shiftKey) {
+                    return;
+                }
                 if (e.key === "Enter") {
                     if (MRUserInputText.value.trim() === "") {
                         e.preventDefault();
@@ -1250,6 +1233,7 @@
                 }
             });
 
+
             MRSendbtnSpan.addEventListener("click", (e) => {
                 handleSendClick();
             });
@@ -1260,7 +1244,7 @@
                     clearTimeout(timerRef);
                 }
                 if (value === "close") {
-                    startIdleTracking("close"); // Restart idle tracking
+                    startIdleTracking("close");
                 } else {
                     startIdleTracking("continous")
                 }
@@ -1278,12 +1262,9 @@
                         }
                     }, 5000);
                 }
-
-
             };
 
             const closeChat = () => {
-                console.log("chat end")
                 loadingContainer.classList.remove("show")
                 MRChatbotSection.classList.remove("Adra-MR-show-chatbot");
                 const feedbackQuestion = document.getElementById("feedback-question")
@@ -1296,12 +1277,8 @@
                 MRChatbotToggler.style.opacity = "1"
                 return
             }
-
         }
     }
 
     window.ChatWidget = ChatWidget;
 })(window, document);
-
-
-
